@@ -1,8 +1,8 @@
 import React, { Component } from 'react';
-import './App.css';
+import classes from './App.css';
 // import Radium, { StyleRoot } from 'radium';
-import styled from 'styled-components';
-import Person from './Person/Person.js';
+// import styled from 'styled-components';
+import Person from '../components/Persons/Person/Person.js';
 
 class App extends Component {
   state = {
@@ -48,18 +48,7 @@ class App extends Component {
 
   render() {
 
-    const style = {
-      backgroundColor: 'green',
-      color: 'white',
-      font: 'inherit',
-      border: '1px solid blue',
-      padding: '8px',
-      cursor: 'pointer',
-      ':hover': {
-        backgroundColor: 'lightgreen',
-        color: 'black'
-      }
-    };
+    const btnClass = [classes.Button];
 
     let persons = null;
     if(this.state.showPersons)
@@ -77,31 +66,28 @@ class App extends Component {
         </div>
       );
 
-      style.backgroundColor = 'red';
-      style[':hover'] = {
-        backgroundColor: 'salmon',
-        color: 'black'
-      };
+      btnClass.push(classes.Red);
     }
 
-    const classes = [];
+    const assignedClasses = [];
     if(this.state.persons.length <= 2)
     {
-      classes.push('red');
+      assignedClasses.push(classes.red);
     }
     if(this.state.persons.length <= 1)
     {
-      classes.push('bold');
+      assignedClasses.push(classes.bold);
     }
+
     return (
       // <StyleRoot>
-        <div className="App">
+        <div className={classes.App}>
           <h1>Hi! This is a React App!!</h1>
-          <p className={classes.join(' ')}>This is working!!</p>
-          <StyledButton alt={this.state.showPersons} onClick = {this.togglePersonsHandler}
+          <p className={assignedClasses.join(' ')}>This is working!!</p>
+          <button className={btnClass.join(' ')} alt={this.state.showPersons} onClick = {this.togglePersonsHandler}
           /*style = {style}*/>
             Toggle Persons
-          </StyledButton>
+          </button>
           {persons}
         </div>
       // </StyleRoot>
